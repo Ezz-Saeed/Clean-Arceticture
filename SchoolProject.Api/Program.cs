@@ -8,13 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
-
 var connection = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(connection);
+    options.UseSqlite(connection);
 });
+
+
+var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
