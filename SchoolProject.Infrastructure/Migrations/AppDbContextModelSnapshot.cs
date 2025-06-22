@@ -30,7 +30,7 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.HasKey("DID");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.DepartmetSubject", b =>
@@ -51,7 +51,7 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.HasIndex("SubID");
 
-                    b.ToTable("DepartmetSubject");
+                    b.ToTable("DepartmetSubject", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Student", b =>
@@ -82,7 +82,7 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.HasIndex("DID");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.StudentSubject", b =>
@@ -103,7 +103,7 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.HasIndex("SubID");
 
-                    b.ToTable("StudentSubject");
+                    b.ToTable("StudentSubject", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Subject", b =>
@@ -122,7 +122,7 @@ namespace SchoolProject.Infrastructure.Migrations
 
                     b.HasKey("SubID");
 
-                    b.ToTable("Subjects");
+                    b.ToTable("Subjects", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.DepartmetSubject", b =>
