@@ -1,6 +1,12 @@
-﻿namespace SchoolProject.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-public class ModuleServicesDependncies
+namespace SchoolProject.Services;
+
+public static class ModuleServicesDependncies
 {
-
+    public static IServiceCollection AddServicesDependncies(this IServiceCollection services)
+    {
+        services.AddTransient<IStudentService, StudentService>();
+        return services;
+    }
 }
