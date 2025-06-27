@@ -8,6 +8,7 @@ public static class ModuleCoreDependncies
     public static IServiceCollection AddCoreDependncies(this IServiceCollection services)
     {
         services.AddMediatR(config => config.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
         return services;
     }
 }

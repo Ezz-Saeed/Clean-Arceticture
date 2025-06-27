@@ -7,6 +7,6 @@ public class StudentRepository(AppDbContext _context) : IStudentRepository
 {
     public async Task<List<Student>> GetStudentsAsync()
     {
-        return await _context.Students.ToListAsync();
+        return await _context.Students.Include(s=>s.Department).ToListAsync();
     }
 }
