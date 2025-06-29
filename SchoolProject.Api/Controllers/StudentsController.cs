@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Core;
+using SchoolProject.Core.Features.Students.Queries.Models;
 
 namespace MyApp.Namespace
 {
@@ -13,6 +14,13 @@ namespace MyApp.Namespace
         public async Task<IActionResult> GetStudentsAsync()
         {
             var response = await _mediator.Send(new GetNewStudentListQuery());
+            return Ok(response);
+        }
+
+        [HttpGet("/student/{id}")]
+        public async Task<IActionResult> GetStudentByIdAsync(int id)
+        {
+            var response = await _mediator.Send(new GetStudentByIdQuery(id));
             return Ok(response);
         }
     }
