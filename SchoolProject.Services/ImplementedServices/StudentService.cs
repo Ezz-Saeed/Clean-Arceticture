@@ -21,5 +21,14 @@ public class StudentService(IStudentRepository _studentRepository) : IStudentSer
         return student!;
     }
 
+    public async Task<string> AddStudentAsync(Student student)
+    {
+        var existingStudent = _studentRepository.GetTableNoTracking().Where(s=>s.Name == student.Name).FirstOrDefault();
+        if (existingStudent is not null) return $"exist";
+
+        await _studentRepository.AddAsync(student);
+        return "success";
+    }
+
     #endregion
 }

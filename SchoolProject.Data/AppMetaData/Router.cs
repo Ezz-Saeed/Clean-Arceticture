@@ -18,6 +18,7 @@ namespace SchoolProject.Data.AppMetaData
             public const string Prefix = $"{Rule}/Student";
             public const string List = $"{Prefix}/List";
             public const string GetById = $"{Prefix}/{SingleRout}";
+            public const string Create = $"{Prefix}/Create";
         }
     }
 }
