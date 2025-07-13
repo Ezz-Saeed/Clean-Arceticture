@@ -6,5 +6,6 @@ public interface IStudentService
 {
     Task<List<Student>> GetStudentsAsync();
     Task<Student> GetStudentByIdAsync(int studentId);
-    public Task<string > AddStudentAsync(Student student);
+    public Task<string> AddStudentAsync(Student student);
+    bool IsNameExist(string name);
 }
