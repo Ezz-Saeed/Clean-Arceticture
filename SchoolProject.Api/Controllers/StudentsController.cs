@@ -1,7 +1,5 @@
-using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SchoolProject.Api.Controllers;
+using SchoolProject.Api.Bases;
 using SchoolProject.Core;
 using SchoolProject.Core.Features.Students.Commands.Models;
 using SchoolProject.Core.Features.Students.Queries.Models;

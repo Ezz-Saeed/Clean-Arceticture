@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Core.Basis;
 using System.Net;
 
-namespace SchoolProject.Api.Controllers
+namespace SchoolProject.Api.Bases
 {
     public class AppControllerBase : ControllerBase
     {
