@@ -4,39 +4,36 @@ using SchoolProject.Services;
 
 namespace SchoolProject.Core.Features.Students.Commands.Validators
 {
-    public class AddStudentValidator : AbstractValidator<AddStudentCommand>
+    public class EditStudentValidator : AbstractValidator<EditStudentCommand>
     {
         #region Fields
-        private readonly IStudentService _studentService;
+        private IStudentService _studentService;
         #endregion
 
-        #region ctors
-        public AddStudentValidator(IStudentService studentService)
+        #region Ctors
+        public EditStudentValidator(IStudentService studentService)
         {
             _studentService = studentService;
             ApplyValidationRules();
-            ApplyCustomValidation();
         }
         #endregion
 
         #region Actions
         public void ApplyValidationRules()
         {
-            RuleFor(s => s.Name).NotEmpty().WithMessage("{PropertyName} is required!")
-                .NotNull()
+            RuleFor(s => s.Name).NotEmpty().WithMessage("{PropertyName} field is required")
                 .MaximumLength(10).WithMessage("Max length for {PropertyName} is 10 characters!");
 
-            RuleFor(s => s.Address).NotEmpty().WithMessage("{PropertyName} is required!")
-                .NotNull()
+            RuleFor(s => s.Address).NotEmpty().WithMessage("{PropertyName} field is required")
                 .MaximumLength(10).WithMessage("Max length for {PropertyName} is 10 characters!");
         }
 
-
-        public void ApplyCustomValidation()
+        public async void ApplyCustomValidationRules()
         {
             RuleFor(s => s.Name)
-                .Must((key, CancellationToken) => !_studentService.IsNameExist(key.Name))
-                .WithMessage("Student with name {PropertyValue} already exists!");
+                .MustAsync(async (model, key, CancellationToken) =>
+                !await _studentService.IsNameExistAsyncExcludeSelf(key, model.Id))
+                .WithMessage("Student with {PropertyName} already exists");
         }
         #endregion
     }

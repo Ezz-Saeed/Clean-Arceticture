@@ -8,4 +8,6 @@ public interface IStudentService
     Task<Student> GetStudentByIdAsync(int studentId);
     public Task<string> AddStudentAsync(Student student);
     bool IsNameExist(string name);
+    Task<bool> IsNameExistAsyncExcludeSelf(string name, int id);
+    Task<string> EditStudent(Student student);
 }

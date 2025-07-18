@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using SchoolProject.Data;
 
 namespace SchoolProject.Core;
 
@@ -10,5 +9,6 @@ public partial class StudentProfile : Profile
         GetStudentListMapping();
         GetStudentByIdMapping();
         AddStudentCommandMapping();
+        EditStudentCommandMapping();
     }
 }

@@ -3,7 +3,6 @@ using MediatR;
 using SchoolProject.Core.Basis;
 using SchoolProject.Core.Features.Students.Queries.Models;
 using SchoolProject.Core.Features.Students.Queries.Results;
-using SchoolProject.Data;
 using SchoolProject.Services;
 
 namespace SchoolProject.Core;
@@ -25,7 +24,7 @@ public class StudentQueryHandler(IStudentService _studentService, IMapper _mappe
     {
         var student = await _studentService.GetStudentByIdAsync(request.Id);
         if (student is null) return NotFound<GetStudentByIdResponse>("");
-        
+
         var res = _mapper.Map<GetStudentByIdResponse>(student);
         return Success(res);
     }

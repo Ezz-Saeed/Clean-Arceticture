@@ -33,5 +33,19 @@ public class StudentService(IStudentRepository _studentRepository) : IStudentSer
         return existingStudent != null;
     }
 
+    public async Task<bool> IsNameExistAsyncExcludeSelf(string name, int id)
+    {
+        var existingStudent = await _studentRepository.GetTableNoTracking()
+            .Where(s => s.Name.Equals(name) & !s.StudID.Equals(id)).FirstOrDefaultAsync();
+
+        return existingStudent is not null;
+    }
+
+    public async Task<string> EditStudent(Student student)
+    {
+        await _studentRepository.UpdateAsync(student);
+        return "success";
+    }
+
     #endregion
 }
