@@ -47,5 +47,26 @@ public class StudentService(IStudentRepository _studentRepository) : IStudentSer
         return "success";
     }
 
+    public async Task<string> DeleteSrudent(Student student)
+    {
+        var transaction = _studentRepository.BeginTransaction();
+        try
+        {
+            await _studentRepository.DeleteAsync(student);
+            transaction.Commit();
+            return "success";
+        }
+        catch
+        {
+            transaction.Rollback();
+            return "failed";
+        }
+    }
+
+    public async Task<Student> GetStudentByIdWithNoIncludesAsync(int studentId)
+    {
+        return await _studentRepository.GetByIdAsync(studentId);
+    }
+
     #endregion
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SchoolProject.Core.Basis
+﻿namespace SchoolProject.Core.Basis
 {
     public class ResponseHandler
     {
@@ -13,13 +7,13 @@ namespace SchoolProject.Core.Basis
         {
 
         }
-        public Response<T> Deleted<T>()
+        public Response<T> Deleted<T>(string message = null)
         {
             return new Response<T>()
             {
                 StatusCode = System.Net.HttpStatusCode.OK,
                 Succeeded = true,
-                Message = "Deleted Successfully"
+                Message = message ?? "Deleted Successfully"
             };
         }
         public Response<T> Success<T>(T entity, object Meta = null)

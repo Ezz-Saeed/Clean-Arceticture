@@ -9,7 +9,8 @@ namespace SchoolProject.Core.Features.Students.Commands.CommandHandlers
 {
     public class StudentCommandHandler(IStudentService _studentService, IMapper _mapper) :
         ResponseHandler, IRequestHandler<AddStudentCommand, Response<string>>,
-        IRequestHandler<EditStudentCommand, Response<string>>
+        IRequestHandler<EditStudentCommand, Response<string>>,
+        IRequestHandler<DeleteStudentCommand, Response<string>>
     {
         public async Task<Response<string>> Handle(AddStudentCommand request, CancellationToken cancellationToken)
         {
@@ -35,6 +36,15 @@ namespace SchoolProject.Core.Features.Students.Commands.CommandHandlers
             if (result == "success") return Success("Student updated successfully");
 
             return BadRequest<string>();
+        }
+
+        public async Task<Response<string>> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
+        {
+            var student = await _studentService.GetStudentByIdWithNoIncludesAsync(request.Id);
+            if (student is null) return NotFound<string>();
+            var result = await _studentService.DeleteSrudent(student);
+            if (result == "success") return Deleted<string>("Student deleted successfully");
+            else return BadRequest<string>();
         }
     }
 }
