@@ -73,5 +73,16 @@ public class StudentService(IStudentRepository _studentRepository) : IStudentSer
         return _studentRepository.GetTableNoTracking().Include(s => s.Department).AsQueryable();
     }
 
+    public IQueryable<Student> GetStudentQueryWithSearch(string search)
+    {
+        var query = _studentRepository.GetTableNoTracking().Include(s => s.Department).AsQueryable();
+
+        if (search is not null)
+        {
+            query = query.Where(s => s.Name.Contains(search) || s.Address.Contains(search));
+        }
+        return query;
+    }
+
     #endregion
 }

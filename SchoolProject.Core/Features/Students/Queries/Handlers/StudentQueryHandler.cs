@@ -41,7 +41,8 @@ public class StudentQueryHandler(IStudentService _studentService, IMapper _mappe
         new GetNewStudentPaginatedListResponse(stu.StudID, stu.Name, stu.Address, stu.Department.DName);
 
         var studentQuery = _studentService.GetStudentQuery();
-        var paginatedResult = await studentQuery.Select(expressiom).ToPaginatedListAsync(request.PageNumber, request.PageSize);
+        var studentQueryWithSearch = _studentService.GetStudentQueryWithSearch(request.Search);
+        var paginatedResult = await studentQueryWithSearch.Select(expressiom).ToPaginatedListAsync(request.PageNumber, request.PageSize);
         return paginatedResult;
     }
     #endregion
