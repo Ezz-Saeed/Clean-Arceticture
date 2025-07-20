@@ -12,4 +12,6 @@ public interface IStudentService
     Task<bool> IsNameExistAsyncExcludeSelf(string name, int id);
     Task<string> EditStudent(Student student);
     Task<string> DeleteSrudent(Student student);
+
+    IQueryable<Student> GetStudentQuery();
 }

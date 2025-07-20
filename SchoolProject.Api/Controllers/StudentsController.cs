@@ -18,6 +18,13 @@ namespace MyApp.Namespace
             return Ok(response);
         }
 
+        [HttpGet(Router.StudentRouting.GetPaginatedResult)]
+        public async Task<IActionResult> GetPaginatedResult([FromQuery] GetStudentPaginatedListQuery query)
+        {
+            var response = await Mediator.Send(query);
+            return Ok(response);
+        }
+
         [HttpGet(Router.StudentRouting.GetById)]
         public async Task<IActionResult> GetStudentByIdAsync(int id)
         {

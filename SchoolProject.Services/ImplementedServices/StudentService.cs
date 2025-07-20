@@ -68,5 +68,10 @@ public class StudentService(IStudentRepository _studentRepository) : IStudentSer
         return await _studentRepository.GetByIdAsync(studentId);
     }
 
+    public IQueryable<Student> GetStudentQuery()
+    {
+        return _studentRepository.GetTableNoTracking().Include(s => s.Department).AsQueryable();
+    }
+
     #endregion
 }
