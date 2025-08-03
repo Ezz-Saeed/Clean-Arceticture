@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data;
+using SchoolProject.Data.Helpers;
 using SchoolProject.Infrastructure;
 
 namespace SchoolProject.Services;
@@ -73,13 +74,29 @@ public class StudentService(IStudentRepository _studentRepository) : IStudentSer
         return _studentRepository.GetTableNoTracking().Include(s => s.Department).AsQueryable();
     }
 
-    public IQueryable<Student> GetStudentQueryWithSearch(string search)
+    public IQueryable<Student> FilterStudentQuery(StudentOrdering studentOrdering, string search)
     {
         var query = _studentRepository.GetTableNoTracking().Include(s => s.Department).AsQueryable();
 
         if (search is not null)
         {
             query = query.Where(s => s.Name.Contains(search) || s.Address.Contains(search));
+        }
+
+        switch (studentOrdering)
+        {
+            case StudentOrdering.StudID:
+                query = query.OrderBy(s => s.StudID);
+                break;
+            case StudentOrdering.Name:
+                query = query.OrderBy(s => s.Name);
+                break;
+            case StudentOrdering.Address:
+                query = query.OrderBy(s => s.Address);
+                break;
+            case StudentOrdering.DepartmentName:
+                query = query.OrderBy(s => s.Department.DName);
+                break;
         }
         return query;
     }

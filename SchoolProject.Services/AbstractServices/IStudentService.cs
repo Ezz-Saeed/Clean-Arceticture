@@ -1,4 +1,5 @@
 ﻿using SchoolProject.Data;
+using SchoolProject.Data.Helpers;
 
 namespace SchoolProject.Services;
 
@@ -13,5 +14,5 @@ public interface IStudentService
     Task<string> EditStudent(Student student);
     Task<string> DeleteSrudent(Student student);
     IQueryable<Student> GetStudentQuery();
-    IQueryable<Student> GetStudentQueryWithSearch(string search);
+    IQueryable<Student> FilterStudentQuery(StudentOrdering studentOrdering, string search);
 }

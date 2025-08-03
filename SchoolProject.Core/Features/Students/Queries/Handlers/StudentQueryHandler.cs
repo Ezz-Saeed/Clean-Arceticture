@@ -37,12 +37,12 @@ public class StudentQueryHandler(IStudentService _studentService, IMapper _mappe
     public async Task<PaginatedResult<GetNewStudentPaginatedListResponse>>
         Handle(GetStudentPaginatedListQuery request, CancellationToken cancellationToken)
     {
-        Expression<Func<Student, GetNewStudentPaginatedListResponse>> expressiom = stu =>
+        Expression<Func<Student, GetNewStudentPaginatedListResponse>> expression = stu =>
         new GetNewStudentPaginatedListResponse(stu.StudID, stu.Name, stu.Address, stu.Department.DName);
 
         var studentQuery = _studentService.GetStudentQuery();
-        var studentQueryWithSearch = _studentService.GetStudentQueryWithSearch(request.Search);
-        var paginatedResult = await studentQueryWithSearch.Select(expressiom).ToPaginatedListAsync(request.PageNumber, request.PageSize);
+        var studentQueryWithSearch = _studentService.FilterStudentQuery(request.OrderBy, request.Search);
+        var paginatedResult = await studentQueryWithSearch.Select(expression).ToPaginatedListAsync(request.PageNumber, request.PageSize);
         return paginatedResult;
     }
     #endregion
