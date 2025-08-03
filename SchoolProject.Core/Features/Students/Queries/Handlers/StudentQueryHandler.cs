@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace SchoolProject.Core;
 
-public class StudentQueryHandler(IStudentService _studentService, IMapper _mapper) : ResponseHandler,
+public class StudentQueryHandler(IStudentService _studentService, IMapper _mapper, IStringLocalizer _stringLocalizer) : ResponseHandler,
     IRequestHandler<GetNewStudentListQuery, Response<List<GetStudentListResponse>>>,
     IRequestHandler<GetStudentByIdQuery, Response<GetStudentByIdResponse>>,
     IRequestHandler<GetStudentPaginatedListQuery, PaginatedResult<GetNewStudentPaginatedListResponse>>
